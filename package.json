@@ -9,14 +9,22 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.90.21",
+    "classnames": "^2.5.1",
+    "formik": "^2.4.9",
     "next": "16.1.6",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-window": "^2.2.7",
+    "sass": "^1.97.3",
+    "zod": "^4.3.6",
+    "zod-formik-adapter": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-window": "^1.8.8",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "typescript": "^5"

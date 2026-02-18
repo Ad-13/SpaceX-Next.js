@@ -1,0 +1,209 @@
+.hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-6);
+  position: relative;
+  overflow: hidden;
+
+  // Subtle background gradient
+  background: 
+    radial-gradient(ellipse at top, rgba(59, 130, 246, 0.08), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(168, 85, 247, 0.06), transparent 50%);
+
+  @media (max-width: 768px) {
+    padding: var(--space-6) var(--space-4);
+  }
+}
+
+.container {
+  max-width: var(--container-max);
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    text-align: center;
+  }
+}
+
+// ── Content ──────────────────────────────────────────────────
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.title {
+  font-size: var(--text-5xl);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  color: var(--color-text-primary);
+
+  @media (max-width: 768px) {
+    font-size: var(--text-4xl);
+  }
+
+  @media (max-width: 480px) {
+    font-size: var(--text-3xl);
+  }
+}
+
+.highlight {
+  color: var(--color-accent);
+  display: inline-block;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0.1em;
+    left: 0;
+    right: 0;
+    height: 0.15em;
+    background: var(--color-accent);
+    opacity: 0.3;
+    border-radius: var(--radius-sm);
+  }
+}
+
+.subtitle {
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+  max-width: 540px;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-normal);
+  text-decoration: none;
+  white-space: nowrap;
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+}
+
+.primaryButton {
+  background-color: var(--color-accent);
+  color: #fff;
+  box-shadow: var(--shadow-md);
+
+  &:hover {
+    background-color: var(--color-accent-hover);
+    box-shadow: var(--shadow-accent);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.secondaryButton {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-border);
+
+  &:hover {
+    background-color: var(--color-bg-elevated);
+    border-color: var(--color-border-hover);
+  }
+}
+
+// ── Image / Visual ───────────────────────────────────────────
+.imageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    order: -1; // Show above content on mobile
+  }
+}
+
+.imagePlaceholder {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1;
+  background: 
+    radial-gradient(circle at 30% 40%, rgba(59, 130, 246, 0.15), transparent 60%),
+    radial-gradient(circle at 70% 60%, rgba(168, 85, 247, 0.1), transparent 60%);
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  // Decorative emoji
+  span {
+    position: absolute;
+    font-size: 4rem;
+    filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.3));
+  }
+}
+
+.rocket {
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%) rotate(-15deg);
+  animation: float 3s ease-in-out infinite;
+}
+
+.planet {
+  bottom: 20%;
+  right: 15%;
+  animation: float 4s ease-in-out infinite 0.5s;
+}
+
+.star {
+  top: 15%;
+  right: 20%;
+  font-size: 2rem;
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0) rotate(-15deg); }
+  50% { transform: translateX(-50%) translateY(-15px) rotate(-15deg); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}

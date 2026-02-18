@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment Variables
+
+Create a `.env.local` file in the root directory:
+
+NEXT_PUBLIC_SPACEX_API_URL=https://api.spacexdata.com/v4
+
 ## Getting Started
 
 First, run the development server:
