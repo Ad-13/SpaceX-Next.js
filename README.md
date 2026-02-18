@@ -2,6 +2,9 @@
 
 A frontend application for exploring SpaceX launches built with Next.js (App Router) + TypeScript, focusing on UI/UX quality, strong typing, data-layer architecture, and performance considerations.
 
+Production deployment (Vercel):
+https://space-x-next-js.vercel.app
+
 ## 🚀 How to Run
 
 1) Clone the repository
