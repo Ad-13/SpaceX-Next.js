@@ -9,3 +9,9 @@ export const queryLaunches = <T>(payload: SpaceXQueryPayload) =>
 
 export const getLaunchById = <T>(id: string) =>
   fetcher<T>(`/launches/${id}`);
+
+export const getRocketById = <T>(id: string) =>
+  fetcher<T>(`/rockets/${id}`);
+
+export const getLaunchpadById = <T>(id: string) =>
+  fetcher<T>(`/launchpads/${id}`);

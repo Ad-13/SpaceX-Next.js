@@ -1,9 +1,21 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
-    domains: ["live.staticflickr.com", "images2.imgbox.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "live.staticflickr.com",
+      },
+      {
+        protocol: "https",
+        hostname: "farm5.staticflickr.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images2.imgbox.com",
+      },
+    ],
   },
 };
 
