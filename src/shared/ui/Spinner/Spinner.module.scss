@@ -6,7 +6,6 @@
   animation: spin 0.7s linear infinite;
 }
 
-// ── Sizes ─────────────────────────────────────────────────────
 .sm {
   width: 14px;
   height: 14px;
@@ -22,12 +21,10 @@
   height: 20px;
 }
 
-// ── Animation ─────────────────────────────────────────────────
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
-// ── Accessibility ─────────────────────────────────────────────  // ???
 .visuallyHidden {
   position: absolute;
   width: 1px;

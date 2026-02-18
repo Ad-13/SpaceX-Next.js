@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Launch } from '@/features/launches/types/launch';
 
 const STORAGE_KEY = 'spacex_favorites';

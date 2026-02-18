@@ -30,7 +30,6 @@
   }
 }
 
-// ── Content ──────────────────────────────────────────────────
 .content {
   display: flex;
   flex-direction: column;
@@ -63,14 +62,13 @@
   }
 }
 
-// ── Image / Visual ───────────────────────────────────────────
 .imageWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
 
   @media (max-width: 768px) {
-    order: -1; // Show above content on mobile
+    order: -1;
   }
 }
 

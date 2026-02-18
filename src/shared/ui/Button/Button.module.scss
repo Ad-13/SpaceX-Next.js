@@ -25,7 +25,6 @@
   }
 }
 
-// ── Sizes ─────────────────────────────────────────────────────
 .sm {
   padding: var(--space-1) var(--space-3);
   font-size: var(--text-sm);
@@ -44,7 +43,6 @@
   height: 48px;
 }
 
-// ── Variants ──────────────────────────────────────────────────
 .primary {
   background-color: var(--color-accent);
   color: #fff;
@@ -88,7 +86,6 @@
   }
 }
 
-// ── Full Width ────────────────────────────────────────────────
 .fullWidth {
   width: 100%;
 }

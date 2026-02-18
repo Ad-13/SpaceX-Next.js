@@ -154,6 +154,10 @@ List virtualization (react-window)
 - Charts (launches per year / success rate)
 - Offline caching (Service Worker)
 - Launch comparison view
+- Split Launch Detail Page into smaller componenrs
+- Better organize SCSS
+- Write Tests
+- Try to find thwe way of moving as many components as possible to server rendering
 
 ## Known Limitations
 

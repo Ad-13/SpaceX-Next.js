@@ -12,7 +12,6 @@ export default function Header() {
   return (
     <header className={styles.header} role="banner">
       <div className={styles.inner}>
-        {/* Logo / Brand */}
         <Link
           href="/"
           className={styles.logo}
@@ -24,7 +23,6 @@ export default function Header() {
           <span className={styles.logoText}>SpaceX Explorer</span>
         </Link>
 
-        {/* Navigation */}
         <nav className={styles.nav} aria-label="Main navigation">
           <ul className={styles.navList} role="list">
             {NAV_LINKS.map(({ href, label }) => (

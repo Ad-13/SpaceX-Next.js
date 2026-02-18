@@ -1,6 +1,5 @@
 import { LaunchesQueryFilters, SortOption, SpaceXQueryPayload } from '../types/launch';
 
-// Exhaustive map — TypeScript will error if a new SortOption is added but not handled here
 const SORT_MAP: Record<SortOption, Record<string, 1 | -1>> = {
   'date-desc': { date_utc: -1 },
   'date-asc': { date_utc: 1 },
