@@ -5,7 +5,7 @@ import LaunchCard from "@/features/launches/components/LaunchCard";
 import FavoriteButton from "@/features/favorites/components/FavoriteButton";
 import Button from "@/shared/ui/Button";
 import styles from "./FavoritesList.module.scss";
-import { useFavorites } from "../../services/useFavorites";
+import { useFavorites } from "../../hooks/useFavorites";
 
 export default function FavoritesList() {
   const { favorites, favoritesCount, isFavorite, toggleFavorite } =

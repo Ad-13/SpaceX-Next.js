@@ -1,8 +1,8 @@
 import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 import { queryLaunches } from '@/lib/api/spacex';
 import { LaunchesResponse, LaunchesQueryFilters } from '../types/launch';
-import { buildSpaceXQuery } from './buildSpaceXQuery';
-import { LAUNCHES_QUERY } from './queryKeys';
+import { buildSpaceXQuery } from '../services/buildSpaceXQuery';
+import { LAUNCHES_QUERY } from '../services/queryKeys';
 
 export function useLaunchesInfiniteQuery(filters: LaunchesQueryFilters) {
   return useInfiniteQuery<

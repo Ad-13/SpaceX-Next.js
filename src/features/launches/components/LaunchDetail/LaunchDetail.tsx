@@ -10,10 +10,10 @@ import {
   useLaunchQuery,
   useRocketQuery,
   useLaunchpadQuery,
-} from "../../services/launchDetailQueries";
+} from "../../hooks/launchDetailQueries";
 import styles from "./LaunchDetail.module.scss";
 import FavoriteButton from "@/features/favorites/components/FavoriteButton/FavoriteButton";
-import { useFavorites } from "@/features/favorites/services/useFavorites";
+import { useFavorites } from "@/features/favorites/hooks/useFavorites";
 
 interface IProps {
   id: string;

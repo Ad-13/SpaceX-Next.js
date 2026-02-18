@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getLaunchById, getRocketById, getLaunchpadById } from '@/lib/api/spacex';
 import { Launch } from '../types/launch';
-import { LAUNCHES_QUERY } from './queryKeys';
+import { LAUNCHES_QUERY } from '../services/queryKeys';
 import { Launchpad } from '../types/launchpad';
 import { Rocket } from '../types/rocket';
 

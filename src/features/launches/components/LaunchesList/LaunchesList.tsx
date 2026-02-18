@@ -1,13 +1,13 @@
 "use client";
 
-import { useLaunchesInfiniteQuery } from "../../services/useLaunchesInfiniteQuery";
+import { useLaunchesInfiniteQuery } from "../../hooks/useLaunchesInfiniteQuery";
 import { LaunchesQueryFilters } from "../../types/launch";
 import LaunchCard from "../LaunchCard";
 import Button from "@/shared/ui/Button";
 import Skeleton from "@/shared/ui/Skeleton";
 import Spinner from "@/shared/ui/Spinner";
 import classNames from "classnames";
-import { useFavorites } from "@/features/favorites/services/useFavorites";
+import { useFavorites } from "@/features/favorites/hooks/useFavorites";
 import styles from "./LaunchesList.module.scss";
 
 interface IProps {
