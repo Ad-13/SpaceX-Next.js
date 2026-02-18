@@ -1,3 +1,17 @@
+export type { LaunchesQueryFilters, SortOption } from './filters';
+
+export interface LaunchLinks {
+  flickr: {
+    original: string[];
+  };
+  patch?: {
+    small?: string;
+    large?: string;
+  };
+  wikipedia?: string;
+  webcast?: string;
+}
+
 export interface Launch {
   id: string;
   name: string;
@@ -5,41 +19,30 @@ export interface Launch {
   success: boolean | null;
   upcoming: boolean;
   details: string | null;
-  links: {
-    flickr: {
-      original: string[];
-    };
-    patch?: {
-      small?: string;
-      large?: string;
-    };
-    wikipedia?: string;
-    webcast?: string;
-  };
+  links: LaunchLinks;
   rocket: string;
   launchpad: string;
 }
 
-export interface LaunchesQueryFilters {
-  upcoming?: boolean;
-  success?: boolean;
-  dateFrom?: string;
-  dateTo?: string;
-  name?: string;
+// paginate-query
+
+export type MongoSortOrder = 1 | -1;
+
+export interface SpaceXQueryOptions {
+  page: number;
+  limit: number;
+  sort?: Record<string, MongoSortOrder>;
+  select?: string[];
 }
 
 export interface SpaceXQueryPayload {
   query: Record<string, unknown>;
-  options: {
-    page: number;
-    limit: number;
-    sort?: Record<string, 1 | -1>;
-    select?: string[];
-  };
+  options: SpaceXQueryOptions;
 }
 
 export interface LaunchesResponse {
   docs: Launch[];
+  totalDocs: number;
   totalPages: number;
   page: number;
   hasNextPage: boolean;
