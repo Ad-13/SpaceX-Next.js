@@ -9,7 +9,7 @@ export default function Providers({ children }: PropsWithChildren) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            retry: 2,
+            retry: false, // implemented in client.ts as per requirements
             staleTime: 60_000,
             refetchOnWindowFocus: false,
           },

@@ -13,6 +13,7 @@ export default function Spinner({ size = 'md', className }: IProps) {
       aria-label="Loading"
     >
       <span className={styles.visuallyHidden}>Loading...</span>
+      
     </span>
   );
 }

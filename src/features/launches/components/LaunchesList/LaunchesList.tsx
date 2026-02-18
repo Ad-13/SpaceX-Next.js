@@ -6,6 +6,8 @@ import LaunchCard from "../LaunchCard";
 import Button from "@/shared/ui/Button";
 import Skeleton from "@/shared/ui/Skeleton";
 import Spinner from "@/shared/ui/Spinner";
+import classNames from "classnames";
+import { useFavorites } from "@/features/favorites/services/useFavorites";
 import styles from "./LaunchesList.module.scss";
 
 interface IProps {
@@ -21,6 +23,8 @@ export default function LaunchesList({ filters }: IProps) {
     error,
     isFetchingNextPage,
   } = useLaunchesInfiniteQuery(filters);
+
+  const { isFavorite, toggleFavorite, favoritesCount } = useFavorites();
 
   if (isLoading) {
     return (
@@ -67,13 +71,28 @@ export default function LaunchesList({ filters }: IProps) {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.list}>
-        {launches.map((launch) => (
-          <LaunchCard key={launch.id} launch={launch} />
-        ))}
-      </div>
+      <p
+        className={classNames(styles.favoritesCount, {
+          [styles.active]: favoritesCount > 0,
+        })}
+        aria-live="polite"
+        role="status"
+      >
+        ★ {favoritesCount} saved {favoritesCount === 1 ? "launch" : "launches"}
+      </p>
 
-      {/* Load More Button */}
+      <ul className={styles.list} aria-label="Launches">
+        {launches.map((launch) => (
+          <li key={launch.id}>
+            <LaunchCard
+              onToggle={toggleFavorite}
+              isFavorite={isFavorite(launch.id)}
+              launch={launch}
+            />
+          </li>
+        ))}
+      </ul>
+
       {hasNextPage && (
         <div className={styles.loadMore}>
           <Button

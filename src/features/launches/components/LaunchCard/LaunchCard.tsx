@@ -1,19 +1,28 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import classNames from 'classnames';
-import { Launch } from '../../types/launch';
-import styles from './LaunchCard.module.scss';
+import { memo } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import classNames from "classnames";
+import { Launch } from "../../types/launch";
+import FavoriteButton from "@/features/favorites/components/FavoriteButton/FavoriteButton";
+import styles from "./LaunchCard.module.scss";
 
-interface LaunchCardProps {
+interface IProps {
   launch: Launch;
+  isFavorite: boolean;
+  onToggle: (launch: Launch) => void;
 }
 
-export default function LaunchCard({ launch }: LaunchCardProps) {
-  const statusVariant = launch.success === null
-    ? 'upcoming'
-    : launch.success
-    ? 'success'
-    : 'failure';
+const LaunchCard = ({
+  launch,
+  isFavorite,
+  onToggle,
+}: IProps) => {
+  const statusVariant =
+    launch.success === null
+      ? "upcoming"
+      : launch.success
+        ? "success"
+        : "failure";
 
   const patch = launch.links?.patch?.small;
 
@@ -39,23 +48,25 @@ export default function LaunchCard({ launch }: LaunchCardProps) {
         <div className={styles.content}>
           <div className={styles.header}>
             <h3 className={styles.name}>{launch.name}</h3>
-            <span
-              className={classNames(styles.badge, styles[statusVariant])}
-            >
-              {statusVariant}
-            </span>
+            <div className={styles.headerActions}>
+              <span className={classNames(styles.badge, styles[statusVariant])}>
+                {statusVariant}
+              </span>
+              <FavoriteButton
+                launch={launch}
+                isFavorite={isFavorite}
+                onToggle={onToggle}
+              />
+            </div>
           </div>
 
-          <time
-            dateTime={launch.date_utc}
-            className={styles.date}
-          >
-            {new Date(launch.date_utc).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
+          <time dateTime={launch.date_utc} className={styles.date}>
+            {new Date(launch.date_utc).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
             })}
           </time>
 
@@ -67,7 +78,6 @@ export default function LaunchCard({ launch }: LaunchCardProps) {
             </p>
           )}
 
-          {/* Additional info */}
           <div className={styles.footer}>
             {launch.links.wikipedia && (
               <span className={styles.link}>📖 Wikipedia</span>
@@ -86,3 +96,5 @@ export default function LaunchCard({ launch }: LaunchCardProps) {
     </Link>
   );
 }
+
+export default memo(LaunchCard);

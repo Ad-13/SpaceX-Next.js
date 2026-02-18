@@ -1,13 +1,19 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import classNames from 'classnames';
-import { Launch } from '../../types/launch';
-import Skeleton from '@/shared/ui/Skeleton';
-import Button from '@/shared/ui/Button';
-import { useLaunchQuery, useRocketQuery, useLaunchpadQuery } from '../../services/launchDetailQueries';
-import styles from './LaunchDetail.module.scss';
+import Link from "next/link";
+import Image from "next/image";
+import classNames from "classnames";
+import { Launch } from "../../types/launch";
+import Skeleton from "@/shared/ui/Skeleton";
+import Button from "@/shared/ui/Button";
+import {
+  useLaunchQuery,
+  useRocketQuery,
+  useLaunchpadQuery,
+} from "../../services/launchDetailQueries";
+import styles from "./LaunchDetail.module.scss";
+import FavoriteButton from "@/features/favorites/components/FavoriteButton/FavoriteButton";
+import { useFavorites } from "@/features/favorites/services/useFavorites";
 
 interface IProps {
   id: string;
@@ -15,9 +21,18 @@ interface IProps {
 }
 
 export default function LaunchDetail({ id, initialLaunch }: IProps) {
-  const { data: launch, isLoading: launchLoading, error } = useLaunchQuery(id, { initialData: initialLaunch });
-  const { data: rocket, isLoading: rocketLoading } = useRocketQuery(launch?.rocket);
-  const { data: launchpad, isLoading: launchpadLoading } = useLaunchpadQuery(launch?.launchpad);
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const {
+    data: launch,
+    isLoading: launchLoading,
+    error,
+  } = useLaunchQuery(id, { initialData: initialLaunch });
+  const { data: rocket, isLoading: rocketLoading } = useRocketQuery(
+    launch?.rocket,
+  );
+  const { data: launchpad, isLoading: launchpadLoading } = useLaunchpadQuery(
+    launch?.launchpad,
+  );
   const isLoading = launchLoading || rocketLoading || launchpadLoading;
 
   if (isLoading) {
@@ -34,7 +49,7 @@ export default function LaunchDetail({ id, initialLaunch }: IProps) {
           </div>
         </div>
         <div className={styles.grid}>
-          {[0, 1].map(i => (
+          {[0, 1].map((i) => (
             <div key={i} className={styles.infoCardSkeleton}>
               <Skeleton width="40%" height={12} />
               <Skeleton width="60%" height={24} />
@@ -53,7 +68,7 @@ export default function LaunchDetail({ id, initialLaunch }: IProps) {
         <div className={styles.errorState}>
           <p className={styles.errorTitle}>Launch not found</p>
           <p className={styles.errorMessage}>
-            {error?.message ?? 'This launch does not exist or failed to load.'}
+            {error?.message ?? "This launch does not exist or failed to load."}
           </p>
           <Button variant="secondary">
             <Link href="/launches">← Back to launches</Link>
@@ -64,8 +79,16 @@ export default function LaunchDetail({ id, initialLaunch }: IProps) {
   }
 
   const statusVariant =
-    launch.success === null ? 'upcoming' : launch.success ? 'success' : 'failure';
-  const statusLabel = launch.upcoming ? 'Upcoming' : launch.success ? 'Success' : 'Failure';
+    launch.success === null
+      ? "upcoming"
+      : launch.success
+        ? "success"
+        : "failure";
+  const statusLabel = launch.upcoming
+    ? "Upcoming"
+    : launch.success
+      ? "Success"
+      : "Failure";
   const patch = launch.links.patch?.large ?? launch.links.patch?.small;
   const flickrImages = launch.links.flickr.original;
 
@@ -86,7 +109,9 @@ export default function LaunchDetail({ id, initialLaunch }: IProps) {
             priority
           />
         ) : (
-          <div className={styles.patchPlaceholder} aria-hidden="true">🚀</div>
+          <div className={styles.patchPlaceholder} aria-hidden="true">
+            🚀
+          </div>
         )}
 
         <div className={styles.heroContent}>
@@ -95,22 +120,25 @@ export default function LaunchDetail({ id, initialLaunch }: IProps) {
             <span className={classNames(styles.badge, styles[statusVariant])}>
               {statusLabel}
             </span>
+            <FavoriteButton
+              launch={launch}
+              isFavorite={isFavorite(launch.id)}
+              onToggle={toggleFavorite}
+            />
           </div>
 
           <time dateTime={launch.date_utc} className={styles.date}>
-            {new Date(launch.date_utc).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-              timeZoneName: 'short',
+            {new Date(launch.date_utc).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+              timeZoneName: "short",
             })}
           </time>
 
-          {launch.details && (
-            <p className={styles.details}>{launch.details}</p>
-          )}
+          {launch.details && <p className={styles.details}>{launch.details}</p>}
 
           <div className={styles.links}>
             {launch.links.webcast && (
@@ -159,7 +187,9 @@ export default function LaunchDetail({ id, initialLaunch }: IProps) {
                 {rocket.success_rate_pct !== null && (
                   <div className={styles.stat}>
                     <dt className={styles.statLabel}>Success rate</dt>
-                    <dd className={styles.statValue}>{rocket.success_rate_pct}%</dd>
+                    <dd className={styles.statValue}>
+                      {rocket.success_rate_pct}%
+                    </dd>
                   </div>
                 )}
                 {rocket.first_flight && (
@@ -171,13 +201,17 @@ export default function LaunchDetail({ id, initialLaunch }: IProps) {
                 {rocket.height.meters !== null && (
                   <div className={styles.stat}>
                     <dt className={styles.statLabel}>Height</dt>
-                    <dd className={styles.statValue}>{rocket.height.meters} m</dd>
+                    <dd className={styles.statValue}>
+                      {rocket.height.meters} m
+                    </dd>
                   </div>
                 )}
                 {rocket.mass.kg !== null && (
                   <div className={styles.stat}>
                     <dt className={styles.statLabel}>Mass</dt>
-                    <dd className={styles.statValue}>{rocket.mass.kg.toLocaleString()} kg</dd>
+                    <dd className={styles.statValue}>
+                      {rocket.mass.kg.toLocaleString()} kg
+                    </dd>
                   </div>
                 )}
               </dl>
@@ -209,14 +243,18 @@ export default function LaunchDetail({ id, initialLaunch }: IProps) {
                 </div>
                 <div className={styles.stat}>
                   <dt className={styles.statLabel}>Status</dt>
-                  <dd className={styles.statValue} style={{ textTransform: 'capitalize' }}>
+                  <dd
+                    className={styles.statValue}
+                    style={{ textTransform: "capitalize" }}
+                  >
                     {launchpad.status}
                   </dd>
                 </div>
                 <div className={styles.stat}>
                   <dt className={styles.statLabel}>Launches</dt>
                   <dd className={styles.statValue}>
-                    {launchpad.launch_successes} / {launchpad.launch_attempts} successful
+                    {launchpad.launch_successes} / {launchpad.launch_attempts}{" "}
+                    successful
                   </dd>
                 </div>
               </dl>
@@ -226,7 +264,10 @@ export default function LaunchDetail({ id, initialLaunch }: IProps) {
       </div>
 
       {flickrImages.length > 0 && (
-        <section className={styles.gallerySection} aria-label="Launch photo gallery">
+        <section
+          className={styles.gallerySection}
+          aria-label="Launch photo gallery"
+        >
           <h2 className={styles.sectionTitle}>Photos</h2>
           <div className={styles.gallery}>
             {flickrImages.map((src, index) => (

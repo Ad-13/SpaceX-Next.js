@@ -1,10 +1,16 @@
+import { Metadata } from 'next';
 import LaunchesList from '@/features/launches/components/LaunchesList';
 import LaunchesFilters from '@/features/launches/components/LaunchesFilters';
 import { parseFiltersFromSearchParams } from '@/features/launches/services/parseFiltersFromSearchParams';
 import styles from './page.module.scss';
 
+export const metadata: Metadata = {
+  title: 'Launch List',
+  description: 'List of all SpaceX launches.',
+};
+
 interface LaunchesPageProps {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
+  searchParams: Promise<Record<string, string | undefined>>;
 }
 
 export default async function LaunchesPage({ searchParams }: LaunchesPageProps) {
