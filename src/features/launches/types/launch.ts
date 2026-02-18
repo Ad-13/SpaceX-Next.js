@@ -9,6 +9,10 @@ export interface Launch {
     flickr: {
       original: string[];
     };
+    patch?: {
+      small?: string;
+      large?: string;
+    };
     wikipedia?: string;
     webcast?: string;
   };
@@ -21,11 +25,23 @@ export interface LaunchesQueryFilters {
   success?: boolean;
   dateFrom?: string;
   dateTo?: string;
-  search?: string; // mission name search
+  name?: string;
+}
+
+export interface SpaceXQueryPayload {
+  query: Record<string, unknown>;
+  options: {
+    page: number;
+    limit: number;
+    sort?: Record<string, 1 | -1>;
+    select?: string[];
+  };
 }
 
 export interface LaunchesResponse {
   docs: Launch[];
   totalPages: number;
   page: number;
+  hasNextPage: boolean;
+  nextPage?: number;
 }
