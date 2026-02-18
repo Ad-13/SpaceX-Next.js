@@ -38,23 +38,22 @@ export default function LaunchDetail({ id, initialLaunch }: IProps) {
   if (isLoading) {
     return (
       <div className={styles.page}>
-        <Skeleton width={120} height={16} />
         <div className={styles.hero}>
           <Skeleton width={140} height={140} borderRadius="var(--radius-lg)" />
           <div className={styles.heroContent}>
-            <Skeleton width="50%" height={36} />
-            <Skeleton width="30%" height={16} />
-            <Skeleton width="100%" height={16} />
-            <Skeleton width="90%" height={16} />
+            <Skeleton width="50%" height={36} marginBottom={16} />
+            <Skeleton width="30%" height={16} marginBottom={16} />
+            <Skeleton width="100%" height={16} marginBottom={30} />
+            <Skeleton width="90%" height={16} marginBottom={16} />
           </div>
         </div>
         <div className={styles.grid}>
           {[0, 1].map((i) => (
             <div key={i} className={styles.infoCardSkeleton}>
-              <Skeleton width="40%" height={12} />
-              <Skeleton width="60%" height={24} />
-              <Skeleton width="100%" height={14} />
-              <Skeleton width="100%" height={14} />
+              <Skeleton width="40%" height={12} marginBottom={16} />
+              <Skeleton width="60%" height={24} marginBottom={16} />
+              <Skeleton width="100%" height={30} marginBottom={16} />
+              <Skeleton width="100%" height={14} marginBottom={16} />
             </div>
           ))}
         </div>

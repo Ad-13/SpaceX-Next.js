@@ -24,6 +24,12 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" className={inter.variable}>
       <body>
+        <a
+          href="#main-content"
+          className="skip-link"
+        >
+          skip to content
+        </a>
         <Providers>
           <MainLayout>{children}</MainLayout>
         </Providers>
