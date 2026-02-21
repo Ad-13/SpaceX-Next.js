@@ -83,11 +83,6 @@ export default function LaunchDetail({ id, initialLaunch }: IProps) {
       : launch.success
         ? "success"
         : "failure";
-  const statusLabel = launch.upcoming
-    ? "Upcoming"
-    : launch.success
-      ? "Success"
-      : "Failure";
   const patch = launch.links.patch?.large ?? launch.links.patch?.small;
   const flickrImages = launch.links.flickr.original;
 
@@ -117,7 +112,7 @@ export default function LaunchDetail({ id, initialLaunch }: IProps) {
           <div className={styles.titleRow}>
             <h1 className={styles.title}>{launch.name}</h1>
             <span className={classNames(styles.badge, styles[statusVariant])}>
-              {statusLabel}
+              {statusVariant}
             </span>
             <FavoriteButton
               launch={launch}
